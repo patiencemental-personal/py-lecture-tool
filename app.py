@@ -133,12 +133,30 @@ button_video_capture = tk.Button(window, text="Test Capture Region", command=cap
 button_video_capture.pack()
 
 
+separator = ttk.Separator(window, orient='horizontal')
+separator.pack(fill='x')
+
+
+# setup mouse click position
+is_input_mouse_click_position = False
+mouse_start_x = 0
+mouse_start_y = 0
+def reverse_is_input_mouse_click_position():
+  global is_input_mouse_click_position
+  is_input_mouse_click_position = not is_input_mouse_click_position
+button_mouse_click_position = tk.Button(window, text="Setup Mouse Click Position", command=reverse_is_input_mouse_click_position)
+label_mouse_position = tk.Label(window, text="Click to set mouse click position")
+button_mouse_click_position.pack()
+label_mouse_position.pack()
+
+
 # Define a function to handle mouse clicks
 def on_mouse_click(x, y, button, pressed):
   try:
     print('{0} at {1}'.format('Pressed' if pressed else 'Released', (x, y)))
     # global is_input_subtitle_start_point, subtitle_start_x, subtitle_start_y, is_input_subtitle_end_point, subtitle_end_x, subtitle_end_y
     global is_input_video_start_point, video_start_x, video_start_y, is_input_video_end_point, video_end_x, video_end_y
+    global is_input_mouse_click_position, mouse_start_x, mouse_start_y
     # if is_input_subtitle_start_point:
     #   subtitle_start_x = x
     #   subtitle_start_y = y
@@ -159,6 +177,11 @@ def on_mouse_click(x, y, button, pressed):
       video_end_y = y
       label_video_end_point.config(text="End point: ({}, {})".format(video_end_x, video_end_y))
       reverse_is_input_video_end_point()
+    if is_input_mouse_click_position:
+      mouse_start_x = x
+      mouse_start_y = y
+      label_mouse_position.config(text="Mouse click position: ({}, {})".format(mouse_start_x, mouse_start_y))
+      reverse_is_input_mouse_click_position()
     # if not pressed:
         # Stop listener
         # return False
@@ -183,11 +206,14 @@ def on_keyboard_press(key):
     #   pyautogui.click()
     #   pyautogui.hotkey('ctrl', 'v')
     if key == keyboard.Key.f2: # video capture
-      print('f4 pressed: capture video region')
+      print('f2 pressed: capture video region')
       image = captureVideoRegion()
       copyToClipboard(image)
       # pyautogui.click()
       pyautogui.hotkey('ctrl', 'v')
+    if key == keyboard.Key.f4:
+      print('f4 pressed: stop or start video')
+      pyautogui.click(mouse_start_x, mouse_start_y)
     if key == keyboard.Key.esc:
       # Stop listener
       return False
