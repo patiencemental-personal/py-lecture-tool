@@ -12,16 +12,16 @@ from io import BytesIO
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # reader = easyocr.Reader(['ko', 'en'])
 
-IMAGE_SUBTITME = "subtitle_screenshot.png"
+# IMAGE_SUBTITME = "subtitle_screenshot.png"
 IMAGE_VIDEO = "video_screenshot.png"
 
 # Global variables to store the start and end coordinates of the region
-subtitle_start_x = 0
-subtitle_start_y = 0
-subtitle_end_x = 0
-subtitle_end_y = 0
-subtitle_width = 0
-subtitle_height = 0
+# subtitle_start_x = 0
+# subtitle_start_y = 0
+# subtitle_end_x = 0
+# subtitle_end_y = 0
+# subtitle_width = 0
+# subtitle_height = 0
 
 video_start_x = 0
 video_start_y = 0
@@ -35,54 +35,54 @@ window = tk.Tk()
 
 # Subtitle
 # label title
-label_subtitle_title = tk.Label(window, text="Subtitle Capture: F4", font=("Arial Bold", 20))
-label_subtitle_title.pack()
+# label_subtitle_title = tk.Label(window, text="Subtitle Capture: F4", font=("Arial Bold", 20))
+# label_subtitle_title.pack()
 
 # subtitle start point
-is_input_subtitle_start_point = False
-def reverse_is_input_subtitle_start_point():
-  global is_input_subtitle_start_point
-  is_input_subtitle_start_point = not is_input_subtitle_start_point
-button_subtitle_start_point = tk.Button(window, text="Setup Start Point", command=reverse_is_input_subtitle_start_point)
-label_subtitle_start_point = tk.Label(window, text="Click and drag to capture a region")
-button_subtitle_start_point.pack()
-label_subtitle_start_point.pack()
+# is_input_subtitle_start_point = False
+# def reverse_is_input_subtitle_start_point():
+#   global is_input_subtitle_start_point
+#   is_input_subtitle_start_point = not is_input_subtitle_start_point
+# button_subtitle_start_point = tk.Button(window, text="Setup Start Point", command=reverse_is_input_subtitle_start_point)
+# label_subtitle_start_point = tk.Label(window, text="Click and drag to capture a region")
+# button_subtitle_start_point.pack()
+# label_subtitle_start_point.pack()
 
 # subtitle end point
-is_input_subtitle_end_point = False
-def reverse_is_input_subtitle_end_point():
-  global is_input_subtitle_end_point
-  is_input_subtitle_end_point = not is_input_subtitle_end_point
-button_subtitle_end_point = tk.Button(window, text="Setup End Point", command=reverse_is_input_subtitle_end_point)
-label_subtitle_end_point = tk.Label(window, text="Click and drag to capture a region")
-button_subtitle_end_point.pack()
-label_subtitle_end_point.pack()
+# is_input_subtitle_end_point = False
+# def reverse_is_input_subtitle_end_point():
+#   global is_input_subtitle_end_point
+#   is_input_subtitle_end_point = not is_input_subtitle_end_point
+# button_subtitle_end_point = tk.Button(window, text="Setup End Point", command=reverse_is_input_subtitle_end_point)
+# label_subtitle_end_point = tk.Label(window, text="Click and drag to capture a region")
+# button_subtitle_end_point.pack()
+# label_subtitle_end_point.pack()
 
-def calculateSubtitleDimensions():
-  global subtitle_start_x, subtitle_start_y, subtitle_end_x, subtitle_end_y, subtitle_width, subtitle_height
-  # Calculate the dimensions of the region
-  print("Start point: ({}, {})".format(subtitle_start_x, subtitle_start_y))
-  print("End point: ({}, {})".format(subtitle_end_x, subtitle_end_y))
-  subtitle_width = subtitle_end_x - subtitle_start_x
-  subtitle_height = subtitle_end_y - subtitle_start_y
-  print ("Dimensions: ({}, {})".format(subtitle_width, subtitle_height))
-  label_subtitle_dimensions.config(text="Dimensions: ({}, {})".format(subtitle_width, subtitle_height))
+# def calculateSubtitleDimensions():
+#   global subtitle_start_x, subtitle_start_y, subtitle_end_x, subtitle_end_y, subtitle_width, subtitle_height
+#   # Calculate the dimensions of the region
+#   print("Start point: ({}, {})".format(subtitle_start_x, subtitle_start_y))
+#   print("End point: ({}, {})".format(subtitle_end_x, subtitle_end_y))
+#   subtitle_width = subtitle_end_x - subtitle_start_x
+#   subtitle_height = subtitle_end_y - subtitle_start_y
+#   print ("Dimensions: ({}, {})".format(subtitle_width, subtitle_height))
+#   label_subtitle_dimensions.config(text="Dimensions: ({}, {})".format(subtitle_width, subtitle_height))
 
-button_subtitle_calculate = tk.Button(window, text="Calculate Capture Region", command=calculateSubtitleDimensions)
-label_subtitle_dimensions = tk.Label(window, text="Dimensions: ({}, {})".format(subtitle_width, subtitle_height))
-button_subtitle_calculate.pack()
-label_subtitle_dimensions.pack()
+# button_subtitle_calculate = tk.Button(window, text="Calculate Capture Region", command=calculateSubtitleDimensions)
+# label_subtitle_dimensions = tk.Label(window, text="Dimensions: ({}, {})".format(subtitle_width, subtitle_height))
+# button_subtitle_calculate.pack()
+# label_subtitle_dimensions.pack()
 
-def captureSubtitleRegion():
-  global subtitle_start_x, subtitle_start_y, subtitle_width, subtitle_height
-  image = pyautogui.screenshot(region=(subtitle_start_x, subtitle_start_y, subtitle_width, subtitle_height))
-  image.save(IMAGE_SUBTITME)
-  return image
-button_subtitle_capture = tk.Button(window, text="Test Capture Region", command=captureSubtitleRegion)
-button_subtitle_capture.pack()
+# def captureSubtitleRegion():
+#   global subtitle_start_x, subtitle_start_y, subtitle_width, subtitle_height
+#   image = pyautogui.screenshot(region=(subtitle_start_x, subtitle_start_y, subtitle_width, subtitle_height))
+#   image.save(IMAGE_SUBTITME)
+#   return image
+# button_subtitle_capture = tk.Button(window, text="Test Capture Region", command=captureSubtitleRegion)
+# button_subtitle_capture.pack()
 
-separator = ttk.Separator(window, orient='horizontal')
-separator.pack(fill='x')
+# separator = ttk.Separator(window, orient='horizontal')
+# separator.pack(fill='x')
 
 # Video
 label_video_title = tk.Label(window, text="Video Capture: F2", font=("Arial Bold", 20))
@@ -137,18 +137,18 @@ button_video_capture.pack()
 def on_mouse_click(x, y, button, pressed):
   try:
     print('{0} at {1}'.format('Pressed' if pressed else 'Released', (x, y)))
-    global is_input_subtitle_start_point, subtitle_start_x, subtitle_start_y, is_input_subtitle_end_point, subtitle_end_x, subtitle_end_y
+    # global is_input_subtitle_start_point, subtitle_start_x, subtitle_start_y, is_input_subtitle_end_point, subtitle_end_x, subtitle_end_y
     global is_input_video_start_point, video_start_x, video_start_y, is_input_video_end_point, video_end_x, video_end_y
-    if is_input_subtitle_start_point:
-      subtitle_start_x = x
-      subtitle_start_y = y
-      label_subtitle_start_point.config(text="Start point: ({}, {})".format(subtitle_start_x, subtitle_start_y))
-      reverse_is_input_subtitle_start_point()
-    if is_input_subtitle_end_point:
-      subtitle_end_x = x
-      subtitle_end_y = y
-      label_subtitle_end_point.config(text="End point: ({}, {})".format(subtitle_end_x, subtitle_end_y))
-      reverse_is_input_subtitle_end_point()
+    # if is_input_subtitle_start_point:
+    #   subtitle_start_x = x
+    #   subtitle_start_y = y
+    #   label_subtitle_start_point.config(text="Start point: ({}, {})".format(subtitle_start_x, subtitle_start_y))
+    #   reverse_is_input_subtitle_start_point()
+    # if is_input_subtitle_end_point:
+    #   subtitle_end_x = x
+    #   subtitle_end_y = y
+    #   label_subtitle_end_point.config(text="End point: ({}, {})".format(subtitle_end_x, subtitle_end_y))
+    #   reverse_is_input_subtitle_end_point()
     if is_input_video_start_point:
       video_start_x = x
       video_start_y = y
@@ -173,20 +173,20 @@ mouseListener.start()
 def on_keyboard_press(key):
   try:
     print('{0} pressed'.format(key))
-    if key == keyboard.Key.f4: # subtitle capture
-      print('f2 pressed: capture subtitle region')
-      image = captureSubtitleRegion()
-      copyToClipboard(image)
-      # result = pytesseract.image_to_string(image, lang='kor+eng')
-      # print(result)
-      # textsFromImage =  reader.readtext(image)
-      pyautogui.click()
-      pyautogui.hotkey('ctrl', 'v')
+    # if key == keyboard.Key.f4: # subtitle capture
+    #   print('f2 pressed: capture subtitle region')
+    #   image = captureSubtitleRegion()
+    #   copyToClipboard(image)
+    #   # result = pytesseract.image_to_string(image, lang='kor+eng')
+    #   # print(result)
+    #   # textsFromImage =  reader.readtext(image)
+    #   pyautogui.click()
+    #   pyautogui.hotkey('ctrl', 'v')
     if key == keyboard.Key.f2: # video capture
       print('f4 pressed: capture video region')
       image = captureVideoRegion()
       copyToClipboard(image)
-      pyautogui.click()
+      # pyautogui.click()
       pyautogui.hotkey('ctrl', 'v')
     if key == keyboard.Key.esc:
       # Stop listener
