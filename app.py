@@ -210,13 +210,21 @@ def on_keyboard_press(key):
       image = captureVideoRegion()
       copyToClipboard(image)
       # pyautogui.click()
+      pyautogui.hotkey('enter')
+      pyautogui.hotkey('enter')
+      pyautogui.hotkey('enter')
+      pyautogui.hotkey('up')
+      pyautogui.hotkey('up')
       pyautogui.hotkey('ctrl', 'v')
+      pyautogui.hotkey('down')
+      pyautogui.hotkey('enter')
     if key == keyboard.Key.f4:
       print('f4 pressed: stop or start video')
       pyautogui.click(mouse_start_x, mouse_start_y)
     if key == keyboard.Key.esc:
       # Stop listener
-      return False
+      # return False
+      print('esc pressed')
   except:
     print("An exception occurred")
 
